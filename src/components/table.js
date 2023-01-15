@@ -20,9 +20,10 @@ export const Table = props => {
             turn===1? 'player_1 to move':'player_2 to move':
             result===1? 'player_1 won':'player_2 won'
 
+    // modify table
     const onHandleCellClick = (row_index, col_index) => {
         // if cell is empty
-        if (table[row_index][col_index]===0) {
+        if (table[row_index][col_index]===0 && result===0) {
             const newTable = []
             table.forEach((row, row_i) => {
                 if (row_index===row_i) {
@@ -34,14 +35,30 @@ export const Table = props => {
                     newTable.push(newRow)
                 } else newTable.push([...row])
             })
-            checkForVictory(newTable)
+
+            setResult(checkForVictory(newTable))
             setTable(newTable)
             setTurn(turn===1?2:1)
         } 
     }
 
+    // win condition
     const checkForVictory = table => {
+        let winner = 0
 
+        // horizontal check
+        table.forEach(row => row[0]!==0 && row[0]===row[1] && row[1]===row[2]? winner=row[0]:null)
+        
+        // vertical check
+        for (let i = 0; i < table.length; i++) {
+            if (table[0][i]!==0 && table[0][i]===table[1][i] && table[1][i]===table[2][i]) winner=table[0][i]
+        }
+        
+        // diagonal check
+        if ( table[0][0]!==0 && table[0][0]===table[1][1] && table[1][1]===table[2][2] ) winner=table[0][0]
+        else if ( table[0][2]!==0 && table[0][2]===table[1][1] && table[1][1]===table[2][0] ) winner=table[0][2]
+
+        return winner
     }
 
     return (

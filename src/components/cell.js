@@ -4,7 +4,7 @@
 // 1: occupied by p1
 // 2: occupied by p2
 export const Cell = ({ occupied, onClick }) => {
-    const content = occupied===0?'_': 
+    const content = occupied===0?'__': 
                     occupied===1?'X':'O'
 
     return (
