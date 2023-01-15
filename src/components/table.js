@@ -62,8 +62,8 @@ export const Table = props => {
     }
 
     return (
-        <>
-        <table>
+        <div className="content">
+        <table className="table">
             <tbody>
             { table.map((row, row_index) => {
                 return (
@@ -78,6 +78,6 @@ export const Table = props => {
             </tbody>
         </table>
         <span>{gameLabel}</span>
-        </>
+        </div>
     );
 }
